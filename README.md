@@ -1,21 +1,42 @@
-# Screen Cheat Sheet for Ubuntu
+<div align="center">
 
-A quick reference guide for using GNU Screen on Ubuntu systems.
+# Screen Cheat Sheet
 
-> **Note:** This is my preferred terminal multiplexer for running persistent sessions on servers.
+<h3>Quick reference for GNU Screen terminal multiplexer on Ubuntu.</h3>
+
+<p>
+  <img src="https://img.shields.io/badge/Platform-Ubuntu-E95420" alt="Ubuntu" />
+  <img src="https://img.shields.io/badge/Tool-GNU%20Screen-green" alt="GNU Screen" />
+  <img src="https://img.shields.io/badge/Type-Cheat%20Sheet-blue" alt="Cheat Sheet" />
+</p>
+
+</div>
+
+---
+
+## What is Screen?
+
+**GNU Screen** is a terminal multiplexer that lets you run multiple terminal sessions inside a single window. My preferred tool for running persistent sessions on servers.
+
+**Simple. Reliable. Lightweight.**
+
+---
 
 ## Installation
 
 ```bash
-sudo apt update
-sudo apt install screen
+sudo apt update && sudo apt install screen
 ```
 
-## Basic Commands
+---
+
+## Quick Reference
+
+### Basic Commands
 
 | Command | Description |
 |---------|-------------|
-| `screen` | Start a new screen session |
+| `screen` | Start a new session |
 | `screen -S name` | Start a new named session |
 | `screen -ls` | List all sessions |
 | `screen -r` | Reattach to last session |
@@ -23,10 +44,9 @@ sudo apt install screen
 | `screen -d -r name` | Detach elsewhere and reattach here |
 | `screen -X -S name quit` | Kill a specific session |
 
-## Key Bindings (prefix is Ctrl+a)
+### Key Bindings (prefix: `Ctrl+a`)
 
-### Session Management
-
+#### Session Management
 | Shortcut | Description |
 |----------|-------------|
 | `Ctrl+a d` | Detach from session |
@@ -34,8 +54,7 @@ sudo apt install screen
 | `Ctrl+a "` | List windows for selection |
 | `Ctrl+a k` | Kill current window |
 
-### Window Management
-
+#### Window Management
 | Shortcut | Description |
 |----------|-------------|
 | `Ctrl+a c` | Create new window |
@@ -43,18 +62,16 @@ sudo apt install screen
 | `Ctrl+a p` | Previous window |
 | `Ctrl+a 0-9` | Switch to window by number |
 
-### Split Screen
-
+#### Split Screen
 | Shortcut | Description |
 |----------|-------------|
 | `Ctrl+a S` | Split horizontally |
-| `Ctrl+a |` | Split vertically |
+| `Ctrl+a \|` | Split vertically |
 | `Ctrl+a Tab` | Switch between splits |
 | `Ctrl+a X` | Close current split |
 | `Ctrl+a Q` | Close all splits except current |
 
-### Scrollback / Copy Mode
-
+#### Scrollback / Copy Mode
 | Shortcut | Description |
 |----------|-------------|
 | `Ctrl+a [` | Enter copy/scrollback mode |
@@ -63,7 +80,9 @@ sudo apt install screen
 | `Enter` | Copy selection (in copy mode) |
 | `Esc` | Exit copy mode |
 
-## Common Configuration
+---
+
+## Configuration
 
 Create `~/.screenrc`:
 
@@ -85,29 +104,19 @@ autodetach on
 defutf8 on
 ```
 
-## Auto-start Screen on SSH Login
+---
+
+## Auto-Start on SSH Login
 
 Add to `~/.bashrc`:
 
 ```bash
-# Auto-start screen on SSH login
 if [[ -n "$SSH_CONNECTION" ]] && [[ -z "$STY" ]]; then
     screen -xRR ssh_session
 fi
 ```
 
-## Auto-start Application in Screen
-
-```bash
-#!/bin/bash
-# Save as ~/start_app.sh and make executable with: chmod +x ~/start_app.sh
-
-# Start a detached named session running a command
-screen -dmS myapp bash -c 'cd /path/to/app && ./start_script.sh'
-
-# To run at boot, add to crontab with: crontab -e
-# @reboot /home/username/start_app.sh
-```
+---
 
 ## Running Node Applications
 
@@ -124,17 +133,29 @@ screen -r my-node
 # Detach again: Ctrl+a d
 ```
 
-## Quick Comparison: Screen vs Tmux
+---
+
+## Screen vs Tmux
 
 | Feature | Screen | Tmux |
-|---------|--------|------|
+|---------|:------:|:----:|
 | Prefix key | `Ctrl+a` | `Ctrl+b` |
-| Detach | `Ctrl+a d` | `Ctrl+b d` |
-| Simpler config | ✅ | |
-| More features | | ✅ |
+| Simpler config | Yes | No |
+| More features | No | Yes |
+| My preference | Yes | - |
 
 I prefer **screen** for its simplicity on server nodes.
 
 ---
 
-For more detailed information, see `man screen`.
+## More Information
+
+Official docs: `man screen`
+
+---
+
+<div align="center">
+
+Built by [@bokiko](https://github.com/bokiko)
+
+</div>
